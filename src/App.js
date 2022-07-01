@@ -1,23 +1,22 @@
-import styled from "./App.module.css";
 import { useEffect, useState } from "react";
+
+function Hello() {
+  useEffect(function () {
+    console.log("Hi : ) ");
+    return function () {
+      console.log("bye : ( ");
+    };
+  }, []);
+  return <h1>Hello</h1>;
+}
+
 function App() {
-  const [counter, setValue] = useState(0);
-  const [keyword, setKeyword] = useState("");
-  const onChange = (event) => setKeyword(event.target.value);
-  const onClick = () => setValue(counter + 1);
-  console.log("always");
-  useEffect(() => console.log("onetime"), []);
-  useEffect(() => console.log(keyword), [keyword]);
+  const [showing, setShowing] = useState(false);
+  const onClick = () => setShowing((tomato) => !tomato);
   return (
     <div>
-      <input
-        value={keyword}
-        onChange={onChange}
-        type="text"
-        placeholder="Search!"
-      ></input>
-      <h1 className={styled.title}>welcome back!{counter}</h1>
-      <button onClick={onClick}> CLick!!!!</button>
+      {showing ? <Hello /> : null}
+      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
     </div>
   );
 }

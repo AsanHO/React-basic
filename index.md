@@ -440,8 +440,31 @@ function App() {
 
 임의로 검색바를 만들어 보았다. 보면 알겠지만 []안의 변수에 변화가 있을때에만 함수를 실행시킨다. 비어있다면, 당연히 변화가 있을리도 없다.
 
-```js
+# Clean Up Function
 
+지금까지의 코드들은 컴포넌트가 실행되면서 시작된다. 만약 컴포넌트가 파괴되었을때도 실행된다면 어떨까?
+
+```js
+function Hello() {
+  useEffect(function () {
+    console.log("Hi : ) ");
+    return function () {
+      console.log("bye : ( ");
+    };
+  }, []);
+  return <h1>Hello</h1>;
+}
+
+function App() {
+  const [showing, setShowing] = useState(false);
+  const onClick = () => setShowing((tomato) => !tomato);
+  return (
+    <div>
+      {showing ? <Hello /> : null}
+      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
+    </div>
+  );
+}
 ```
 
 ```js

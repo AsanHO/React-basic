@@ -3,12 +3,12 @@ import Home from "./routes/Home";
 import Detail from "./routes/Detail";
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Switch>
         <Route path="/movie/:id">
           <Detail />
         </Route>
-        <Route basename={process.env.PUBLIC_URL}>
+        <Route path="/">
           <Home />
         </Route>
       </Switch>
